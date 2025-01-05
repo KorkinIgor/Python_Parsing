@@ -1,0 +1,17 @@
+import requests
+from bs4 import BeautifulSoup
+
+
+url = "https://st-dvorik.ru/lego-instruction/blender/"
+
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+
+name = soup.find_all("h2", "woocommerce-loop-product__title")
+price = soup.find("span","woocommerce-Price-amount amount")
+
+for i in name:
+    print(i)
+
+
