@@ -1,0 +1,17 @@
+from re import search
+from sys import platform
+from selenium_stealth import stealth
+from bs4 import BeautifulSoup
+from selenium import webdriver
+import time
+
+
+def init_webdriver():
+    driver_def = webdriver.Chrome()
+    stealth(driver_def, platform = "Win32")
+    return driver_def
+
+
+driver = init_webdriver()
+driver.get("https://www.ozon.ru/")
+time.sleep(10)
