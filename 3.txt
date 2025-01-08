@@ -1,0 +1,30 @@
+
+#Сайт st dvorik имеет неудобную url ссылку для парсинга весь товаровов, поэтому пришлось пойти таким способом:
+
+import requests
+from bs4 import BeautifulSoup
+
+
+url = "https://st-dvorik.ru/lego-instruction/instrukcii-lego-ev3/"
+
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+
+name = soup.find_all("h2", "woocommerce-loop-product__title")
+
+for i in name:
+    print(i.text)
+
+print("-----------")
+for count_page in range(2, 10):
+    print(count_page)
+    ulr_next = f"https://st-dvorik.ru/lego-instruction/instrukcii-lego-ev3/page/{count_page}/"
+    response_next = requests.get(ulr_next)
+    soup_next = BeautifulSoup(response_next.text, "html.parser")
+    name_next = soup_next.find_all("h2", "woocommerce-loop-product__title")
+    for i in name_next:
+        print(i.text)
+
+
+
